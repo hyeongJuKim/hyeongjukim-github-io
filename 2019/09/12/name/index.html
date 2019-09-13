@@ -1,13 +1,11 @@
-<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>if __name__ =='__main__' 은 왜 사용할까?</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css"><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><nav class="main-nav"><a href="/">Home</a><a href="/about">About</a><a href="/tags">Tags</a><a href="/archives">Archives</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>HJ</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>if __name__ =='__main__' 은 왜 사용할까?</h1><h2 class="headline">Sep 12, 2019 9:01·175 words
-·1 minutes read<span class="tags"></span></h2></header><section id="post-body"><p>먼저 __name__ 이 무엇인지 부터 알아보자.<br>__name__ 은 모듈의 이름을 저장하는 파이썬 내장 변수이다.</p>
-<p>파일을 실행하거나 import 할 때 함수가 아닌 0 deps의 코드를 실행한다.<br>이 변수는 두 경우에 따라 값이 다르게 할당된다.</p>
-<p>직접 실행하는 경우<br>__name__ 변수에 ‘__main__‘ 값이 할당된다.  </p>
-<p>import하는 경우</p>
-<ul>
-<li>__name__ 변수에 해당 모듈의 이름이 할당되고, 함수가 아닌 0 deps의 코드를 실행한다.</li>
-</ul>
-<p>해당 모듈을 import 할 때 자동으로 실행되는 것을 방지 하기 위해 if __name__ == ‘<strong>main</strong>‘ 을 사용한다.</p>
-<p>print_hello.py를 직접 실행해보자.</p>
+<!DOCTYPE html><html><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>if __name__ =='__main__' 은 왜 사용할까?</title><link rel="shortcut icon" href="/images/avatar.png"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css"><script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><nav class="main-nav"><a href="/">Home</a><a href="/about">About</a><a href="/tags">Tags</a><a href="/archives">Archives</a></nav><div class="profile"><section id="wrapper"><header id="header"><a href="/about"><img class="2x" id="avatar" src="/images/avatar.png"></a><h1>HJ</h1><h2></h2></header></section></div><section class="post" id="wrapper"><article><header><h1>if __name__ =='__main__' 은 왜 사용할까?</h1><h2 class="headline">Sep 12, 2019 9:01·184 words
+·1 minutes read<span class="tags"></span></h2></header><section id="post-body"><p>__name__ 은 모듈의 이름을 저장하는 파이썬 내장 변수이다.<br>파이썬 파일은 두 가지 경우로 실행이 될 수 있다.  </p>
+<p>1.직접 실행하는 경우</p>
+<pre><code>__name__ 변수에 문자열 &#39;__main__&#39; 이 할당된다.  
+함수가 아닌 0 deps의 코드를 실행.  </code></pre><p>2.import하는 경우  </p>
+<pre><code>__name__ 변수에 해당 모듈의 이름이 할당.  
+함수가 아닌 0 deps의 코드를 실행.  </code></pre><p>__name__ 을 통해 파이썬 파일이 어떻게 실행되었는지를 알 수가 있다.<br>그리고 모듈을 import하면서 원치 않는 코드가 실행 될 수가 있다.<br>이것을 방지하기 위해 <code>if __name__ == &#39;__main__&#39;</code> 조건문을 통해 분기처리를 하는 것이다.  </p>
+<p>ex) 예제 코드<br>1.print_hello.py를 직접 실행</p>
 <p><code>print_hello.py</code></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> print_hello<span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'hello'</span><span class="token punctuation">)</span>
@@ -18,7 +16,7 @@
 <pre class=" language-python"><code class="language-python">print_hello<span class="token punctuation">.</span>py __name__<span class="token punctuation">:</span> __main__
 test hello</code></pre>
 <p>__name__ 이라는 변수에는 <strong>main</strong> 이 담겨져 있고<br>0 deps 코드가 실행이 된다.</p>
-<p>다른 파일에서 import해보자.<br><code>main.py</code></p>
+<p>2.다른 파일에서 import<br><code>main.py</code></p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> print_hello
 
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'main.py __name__:'</span><span class="token punctuation">,</span> __name__<span class="token punctuation">)</span></code></pre>
@@ -26,7 +24,8 @@ test hello</code></pre>
 <pre class=" language-python"><code class="language-python">print_hello<span class="token punctuation">.</span>py __name__<span class="token punctuation">:</span> hello
 test hello
 main<span class="token punctuation">.</span>py __main__</code></pre>
-<p>__name__ 이라는 변수에는 print_hello 가 담겨져 있고, print_hello.py 를 import 하면서 0 deps 코드를 실행한다.<br>import 할 때 자동적으로 코드가 실행되는 것을 방지하기 위해 비교하는 조건문을 사용하는 것이다.</p>
+<p>__name__ 이라는 변수에는 print_hello 가 담겨지고, print_hello.py 를 import 하면서 0 deps 코드를 실행되었다.</p>
+<p>정리<br>아래 처럼 조건을 통하여 원하는 분기처리를 하면된다.  </p>
 <pre class=" language-python"><code class="language-python"><span class="token keyword">if</span> __name__ <span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'직접 실행됨'</span><span class="token punctuation">)</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>

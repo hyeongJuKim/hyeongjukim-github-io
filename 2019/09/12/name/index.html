@@ -26,7 +26,7 @@ test hello
 main<span class="token punctuation">.</span>py __main__</code></pre>
 <p>__name__ 이라는 변수에는 print_hello 가 담겨지고, print_hello.py 를 import 하면서 0 deps 코드를 실행되었다.</p>
 <p>정리<br>아래 처럼 조건을 통하여 원하는 분기처리를 하면된다.  </p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">if</span> __name__ <span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'직접 실행됨'</span><span class="token punctuation">)</span>
 <span class="token keyword">else</span><span class="token punctuation">:</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'import되어 실행됨'</span><span class="token punctuation">)</span></code></pre>
